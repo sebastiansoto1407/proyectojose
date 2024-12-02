@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adivina el Personaje - Game Trivia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="characters.css">
+    <style>
+        /* Estilo de los botones cuando están deshabilitados */
+        .game-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .character-image {
+    width: 300px;  /* Ajusta el ancho como desees */
+    height: 400px; /* Ajusta la altura como desees */
+    object-fit: cover;  /* Esto hace que la imagen cubra el contenedor sin distorsionarse */
+}
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Adivina el Personaje</a>
+                <div class="profile">
+                    <p class="text-white mb-0"><span id="user-name">Usuario</span></p>
+                    <p class="text-white mb-0"> <span id="user-points">0</span></p>
+                    <p class="text-white mb-0"> <span id="user-coins">0</span></p>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mt-5">
+        <div class="game-section">
+            <div class="d-flex justify-content-between align-items-center">
+                <button class="btn btn-info btn-sm" onclick="goBackToHome()">Volver a la página principal</button>
+            </div>
+            <h3 class="text-center">¡Adivina el Personaje!</h3>
+            <p class="text-center">Elige la respuesta correcta:</p>
+            <!-- Agregar estas líneas para mostrar la descripción y la pista -->
+            <div id="character-description" class="text-center mt-3 text-muted"></div>
+            <div id="character-hint" class="text-center mt-2 text-info"></div>
+    
+            <div id="character-container" class="d-flex justify-content-center align-items-center mb-4">
+                <img id="character-image" src="" alt="Imagen del personaje" class="img-fluid character-image">
+
+            </div>
+    
+            <div id="options" class="d-flex justify-content-center">
+                <button class="btn btn-primary m-2 game-btn" id="option1" disabled onclick="checkAnswer('option1')">Opción 1</button>
+                <button class="btn btn-primary m-2 game-btn" id="option2" disabled onclick="checkAnswer('option2')">Opción 2</button>
+                <button class="btn btn-primary m-2 game-btn" id="option3" disabled onclick="checkAnswer('option3')">Opción 3</button>
+                <button class="btn btn-primary m-2 game-btn" id="option4" disabled onclick="checkAnswer('option4')">Opción 4</button>
+            </div>
+    
+            
+    
+            <div id="timer" class="text-center mt-2"></div>
+    
+            <div id="result-message" class="mt-3 text-center">
+                <p id="result-text"></p>
+            </div>
+            
+    
+            
+        </div>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="acercade.html" class="footer-link">Acerca de</a>
+                <a href="apoyo.html" class="footer-link">Apoyo</a>
+                <a href="formulario.html" class="footer-link">Formulario</a>
+                <a href="dash.html" class="footer-link">Dashboard</a>
+                <a href="comprar.html" class="footer-link">Comprar en mi tienda</a>
+                <a href="problemas.html" class="footer-link">¿Problemas?</a>
+                <a href="contacto.html" class="footer-link">Contacto</a>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/joseram_lm?igsh=MXU4Zjl5OGhrMTJkYg==" class="social-icon">🔗</a>
+                    <a href="https://www.facebook.com/share/15b41PcHa5/?mibextid=LQQJ4d" class="social-icon">🌐</a>
+                </div>
+            
+        </div>
+    </footer>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Verificar si el usuario está logueado
+    if (localStorage.getItem("loggedIn") !== "true") {
+        window.location.href = "index.html";
+    }
+    
+    // Obtener el nombre del usuario actual
+    const userName = localStorage.getItem("currentUser");
+    
+    // Obtener datos del usuario
+    let userPoints = parseInt(localStorage.getItem(`${userName}-points`)) || 0;
+    let userCoins = parseInt(localStorage.getItem(`${userName}-coins`)) || 0;
+    
+    // Mostrar los datos en la página
+    document.getElementById("user-name").textContent = `Usuario: ${userName}`;
+    document.getElementById("user-points").textContent = `Puntos: ${userPoints}`;
+    document.getElementById("user-coins").textContent = `Monedas: ${userCoins}`;
+    
+    // Definir las preguntas y respuestas (personajes)
+    const characters = [
+        {
+            image: 'batman2.webp', 
+            correctAnswer: 'option2',
+            options: {
+                option1: 'Superman',
+                option2: 'Batman',
+                option3: 'Wonder Woman',
+                option4: 'Flash'
+            },
+            description: 'Este personaje es un vigilante de Gotham City, conocido por su fuerza, inteligencia y habilidades de combate. No tiene poderes, pero utiliza tecnología avanzada y su gran capacidad de detective para luchar contra el crimen.',
+            hint: 'Este héroe usa una capa y un murciélago como símbolo.'
+        },
+        {
+            image: 'capitan.png', 
+            correctAnswer: 'option4',
+            options: {
+                option1: 'Spiderman',
+                option2: 'Ironman',
+                option3: 'Thor',
+                option4: 'Captain America'
+            },
+            description: 'Un supersoldado que fue congelado en el hielo durante la Segunda Guerra Mundial y despertó décadas después. Con un escudo indestructible y un gran sentido del deber, luchó por la libertad y la justicia.',
+            hint: 'Este héroe tiene un escudo en forma de círculo y es conocido por su lealtad y valentía.'
+        },
+        {
+            image: 'tony.jpg', 
+            correctAnswer: 'option1',
+            options: {
+                option1: 'Ironman',
+                option2: 'Thor',
+                option3: 'Hulk',
+                option4: 'Black Widow'
+            },
+            description: 'Un genio, multimillonario, playboy y filántropo que usa una armadura de alta tecnología para proteger al mundo. Su identidad secreta es Tony Stark, un inventor que decidió usar su riqueza y conocimientos para luchar contra el mal.',
+            hint: 'Este héroe tiene una armadura brillante y es conocido por su inteligencia y su capacidad para crear tecnología avanzada.'
+        },
+        {
+            image: 'strange.jpg', 
+            correctAnswer: 'option3',
+            options: {
+                option1: 'Black Panther',
+                option2: 'Spider-Man',
+                option3: 'Doctor Strange',
+                option4: 'Ant-Man'
+            },
+            description: 'Un maestro de las artes místicas que protege la Tierra de amenazas sobrenaturales. Tiene la capacidad de viajar entre dimensiones y enfrenta enemigos que amenazan la realidad misma.',
+            hint: 'Este héroe tiene un anillo que le permite manipular energías místicas y viajar entre dimensiones.'
+        },
+        {
+    "image": "thor.webp",
+    "correctAnswer": "option1",
+    "options": {
+        "option1": "Thor",
+        "option2": "Hawkeye",
+        "option3": "Black Widow",
+        "option4": "Loki"
+    },
+    "description": "El dios del trueno, que empuña un martillo mágico llamado Mjolnir, el cual le otorga el control sobre los rayos y la capacidad de volar.",
+    "hint": "Este héroe es el hijo de Odín y está relacionado con la mitología nórdica."
+},
+{
+    "image": "Cyclops.webp",
+    "correctAnswer": "option4",
+    "options": {
+        "option1": "Wolverine",
+        "option2": "Storm",
+        "option3": "Jean Grey",
+        "option4": "Cyclops"
+    },
+    "description": "Líder de los X-Men que utiliza un visor especial para controlar sus rayos ópticos, que son tan potentes que pueden atravesar acero.",
+    "hint": "Este héroe es conocido por sus habilidades de liderazgo y su visor rojo distintivo."
+},
+{
+    "image": "Black Widow.webp",
+    "correctAnswer": "option3",
+    "options": {
+        "option1": "Scarlet Witch",
+        "option2": "Vision",
+        "option3": "Black Widow",
+        "option4": "Hawkeye"
+    },
+    "description": "Una espía y experta en artes marciales que forma parte de los Vengadores. Es conocida por su agilidad, precisión y capacidad para infiltrarse en cualquier lugar.",
+    "hint": "Este personaje fue originalmente una agente de S.H.I.E.L.D."
+},
+{
+    "image": "superman.webp",
+    "correctAnswer": "option2",
+    "options": {
+        "option1": "Batman",
+        "option2": "Superman",
+        "option3": "Green Lantern",
+        "option4": "The Flash"
+    },
+    "description": "Un héroe alienígena con super fuerza, visión láser y la capacidad de volar. Es conocido como el protector de la Tierra y un símbolo de esperanza.",
+    "hint": "Este héroe lleva una S en su pecho, que simboliza esperanza en su planeta natal."
+},
+{
+    "image": "WonderWoman.jpg",
+    "correctAnswer": "option3",
+    "options": {
+        "option1": "Aquaman",
+        "option2": "Flash",
+        "option3": "Wonder Woman",
+        "option4": "Cyborg"
+    },
+    "description": "Una guerrera amazona inmortal, equipada con un lazo mágico y brazaletes indestructibles, que lucha por la justicia y la paz en el mundo.",
+    "hint": "Es conocida como la princesa Diana de Themyscira."
+},
+{
+    "image": "Wolverine.webp",
+    "correctAnswer": "option4",
+    "options": {
+        "option1": "Magneto",
+        "option2": "Charles Xavier",
+        "option3": "Beast",
+        "option4": "Wolverine"
+    },
+    "description": "Un mutante con garras retráctiles de adamantium y un factor de curación acelerado. Es conocido por su actitud ruda pero leal.",
+    "hint": "Es llamado Logan y es miembro de los X-Men."
+},
+{
+    "image": "Star-Lord.jpg",
+    "correctAnswer": "option2",
+    "options": {
+        "option1": "Gamora",
+        "option2": "Star-Lord",
+        "option3": "Rocket Raccoon",
+        "option4": "Groot"
+    },
+    "description": "Un aventurero y líder de los Guardianes de la Galaxia, que siempre lleva consigo su fiel reproductor de casetes.",
+    "hint": "Es mitad humano, mitad celestial, y su verdadero nombre es Peter Quill."
+},
+{
+    "image": "Ultron.webp",
+    "correctAnswer": "option4",
+    "options": {
+        "option1": "Thanos",
+        "option2": "Galactus",
+        "option3": "Loki",
+        "option4": "Ultron"
+    },
+    "description": "Un villano robótico que busca la destrucción de la humanidad para construir un mundo perfecto a su imagen.",
+    "hint": "Fue creado accidentalmente por Tony Stark y Bruce Banner."
+},
+{
+        "image": "joker.jpg",
+        "correctAnswer": "option4",
+        "options": {
+            "option1": "Superman",
+            "option2": "Batman",
+            "option3": "Wonder Woman",
+            "option4": "Joker"
+        },
+        "description": "Un villano psicópata y archienemigo de Batman, conocido por su caos y su sentido del humor retorcido.",
+        "hint": "Este villano tiene una sonrisa permanente y ama el caos."
+    },
+    {
+        "image": "Goku.jpg",
+        "correctAnswer": "option1",
+        "options": {
+            "option1": "Goku",
+            "option2": "Naruto",
+            "option3": "Luffy",
+            "option4": "Saitama"
+        },
+        "description": "Un guerrero Saiyan conocido por su habilidad en combate y su deseo de mejorar constantemente.",
+        "hint": "Este héroe tiene el poder de alcanzar niveles inmensos de fuerza tras entrenar duramente."
+    },
+    {
+        "image": "Naruto.webp",
+        "correctAnswer": "option2",
+        "options": {
+            "option1": "Goku",
+            "option2": "Naruto",
+            "option3": "Luffy",
+            "option4": "Saitama"
+        },
+        "description": "Un joven ninja con el sueño de convertirse en Hokage, el líder de su aldea.",
+        "hint": "Este héroe tiene un zorro de nueve colas sellado dentro de él."
+    },
+    {
+        "image": "Spiderman.jpg",
+        "correctAnswer": "option1",
+        "options": {
+            "option1": "Spiderman",
+            "option2": "Ironman",
+            "option3": "Thor",
+            "option4": "Captain America"
+        },
+        "description": "Un joven llamado Peter Parker que, tras ser mordido por una araña radiactiva, obtiene habilidades arácnidas, como trepar paredes y un sentido arácnido.",
+        "hint": "Este héroe lleva un traje rojo y azul con una araña en el pecho."
+    }
+
+
+
+
+
+
+
+
+        
+        
+        
+        // Puedes agregar más personajes con la misma estructura
+    ];
+    
+    let currentRound = 0;
+    let timer;
+    let countdownTime = 10; // 10 segundos para cada ronda
+    
+    // Función para cargar la próxima ronda
+    function loadRound() {
+        // Si se han completado todas las rondas, mostrar el mensaje de fin de juego
+        if (currentRound >= characters.length) {
+            showGameOverMessage(); // Mostrar mensaje de "Juego Terminado"
+            return;
+        }
+    
+        const character = characters[currentRound];
+        document.getElementById("character-image").src = character.image;
+        document.getElementById("options").innerHTML = `
+            <button class="btn btn-primary m-2 game-btn" id="option1" onclick="checkAnswer('option1')">${character.options.option1}</button>
+            <button class="btn btn-primary m-2 game-btn" id="option2" onclick="checkAnswer('option2')">${character.options.option2}</button>
+            <button class="btn btn-primary m-2 game-btn" id="option3" onclick="checkAnswer('option3')">${character.options.option3}</button>
+            <button class="btn btn-primary m-2 game-btn" id="option4" onclick="checkAnswer('option4')">${character.options.option4}</button>
+        `;
+        
+        // Mostrar la descripción y la pista del personaje
+        document.getElementById("character-description").textContent = character.description;
+        document.getElementById("character-hint").textContent = `Pista: ${character.hint}`;
+    
+        resetTimer(); // Reiniciar cronómetro
+        startTimer();  // Iniciar cronómetro automáticamente al cargar la nueva ronda
+    }
+    
+    // Función para iniciar el cronómetro
+    function startTimer() {
+        countdownTime = 10; // Establecer tiempo en 10 segundos
+        document.getElementById("timer").textContent = formatTime(countdownTime);
+    
+        clearInterval(timer); // Limpiar cualquier temporizador anterior
+        timer = setInterval(function() {
+            countdownTime--;
+            document.getElementById("timer").textContent = formatTime(countdownTime);
+    
+            // Cuando el tiempo llega a 0, pasar a la siguiente ronda
+            if (countdownTime <= 0) {
+                clearInterval(timer); // Detener el cronómetro
+                document.getElementById("result-message").style.display = "block";
+                document.getElementById("result-text").textContent = "Se acabó el tiempo! Respuesta pasada.";
+                setTimeout(() => {
+                    currentRound++;
+                    loadRound(); // Cargar la siguiente ronda
+                    document.getElementById("result-message").style.display = "none";
+                }, 1000);
+            }
+        }, 1000);
+    }
+    
+    // Función para dar formato al tiempo
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+        return `${minutes < 10 ? '0' : ''}${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+    }
+    
+    // Función para actualizar los puntos y las monedas en la página
+    function updateUserStats() {
+        document.getElementById("user-points").textContent = `Puntos: ${userPoints}`;
+        document.getElementById("user-coins").textContent = `Monedas: ${userCoins}`;
+        localStorage.setItem(`${userName}-points`, userPoints);
+        localStorage.setItem(`${userName}-coins`, userCoins);
+    }
+    
+    // Función para verificar si la respuesta es correcta
+    function checkAnswer(selectedOption) {
+        const character = characters[currentRound];
+        let resultMessage = document.getElementById("result-message");
+        let resultText = document.getElementById("result-text");
+    
+        // Si la respuesta es correcta
+        if (selectedOption === character.correctAnswer) {
+            resultText.textContent = "¡Correcto! Has ganado 10 puntos y 5 monedas.";
+            userPoints += 10;
+            userCoins += 5;
+            updateUserStats();
+        } else {
+            resultText.textContent = "¡Incorrecto! Intenta de nuevo.";
+        }
+    
+        resultMessage.style.display = "block";
+    
+        // Esperar 2 segundos antes de avanzar a la siguiente ronda
+        setTimeout(() => {
+            resultMessage.style.display = "none";
+            currentRound++;
+            loadRound(); // Cargar la siguiente ronda
+        }, 2000);
+    }
+    
+    // Función para mostrar mensaje de fin de juego con advertencia
+function showGameOverMessage() {
+    // Mostrar el mensaje de fin de juego
+    document.getElementById("result-message").style.display = "block";
+    document.getElementById("result-text").textContent = "¡Juego Terminado! Has completado todas las rondas.";
+
+    // Mostrar el mensaje de advertencia después de 2 segundos
+    setTimeout(() => {
+        alert("¡Has completado todas las preguntas! Vuelve pronto para jugar nuevamente.");
+    }, 2000);
+
+    // Después de mostrar el mensaje de fin de juego, reiniciar el juego
+    setTimeout(() => {
+        currentRound = 0;  // Reiniciar a la primera ronda
+        resetTimer();  // Reiniciar el cronómetro
+        document.getElementById("result-message").style.display = "none"; // Ocultar mensaje
+        loadRound(); // Volver a cargar la primera ronda
+    }, 3000); // 3 segundos para mostrar el mensaje antes de reiniciar
+}
+
+    
+    // Función para reiniciar el cronómetro (en caso de que necesitemos resetearlo)
+    function resetTimer() {
+        clearInterval(timer); // Detener el cronómetro
+        countdownTime = 10; // Resetear tiempo a 10 segundos
+        document.getElementById("timer").textContent = formatTime(countdownTime); // Mostrar el tiempo reiniciado
+    }
+    
+    // Cargar la primera ronda
+    loadRound();
+    
+    // Función para volver a la página principal
+    function goBackToHome() {
+        if (localStorage.getItem("loggedIn") === "true") {
+            window.location.href = "principal.html";
+        } else {
+            window.location.href = "index.html";
+        }
+    }
+    
+    </script>
+    
+    
+</body>
+</html>

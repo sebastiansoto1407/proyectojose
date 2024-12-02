@@ -1,0 +1,362 @@
+/* General */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: background 0.5s ease-in-out;
+}
+
+/* Header */
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: linear-gradient(135deg, #2E3B4E, #1A2A3A);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    border-bottom: 4px solid #FF5C8D;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+header nav:hover {
+    background: linear-gradient(135deg, #2C3E50, #1F2A38); /* Hover effect on nav */
+}
+
+header nav .profile {
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+}
+
+header nav h2 {
+    font-size: 1.8rem;
+    color: #FF5C8D;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+header nav p {
+    margin: 5px 0;
+    color: #ccc;
+}
+
+header nav button {
+    padding: 12px 20px;
+    background: #FF8F00;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+header nav button:hover {
+    background: #F22B69;
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    transition: transform 0.3s, box-shadow 0.3s ease-in-out;
+}
+
+/* Main Section */
+main {
+    padding: 20px 40px;
+    background-color: #2B3A47;
+    flex-grow: 1;
+    box-sizing: border-box;
+    transition: background-color 0.5s ease;
+}
+
+/* Actions Section */
+.actions {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeIn 1.5s ease-out;
+}
+
+.actions h1 {
+    color: #FF5C8D;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.actions h1:hover {
+    color: #FF8F00;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    animation: fadeInUp 1.5s ease-out;
+}
+
+.action-buttons button {
+    padding: 12px 20px;
+    background-color: #03A9F4;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: white;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.action-buttons button:hover {
+    background: #0288D1;
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Games Section */
+.games {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.games h1 {
+    color: #FF5C8D;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.game-mode {
+    background-color: #1F2A44;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.game-mode:hover {
+    background-color: #25313D;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.game-mode h2 {
+    color: #FF8F00;
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+}
+
+.game-mode button {
+    padding: 12px 20px;
+    background-color: #FF5C8D;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.game-mode button:hover {
+    background: #F22B69;
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Store Section */
+.store {
+    text-align: center;
+    background-color: #222;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease-in-out;
+}
+
+.store:hover {
+    transform: scale(1.02);
+}
+
+.store h1 {
+    color: #FF5C8D;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.store p {
+    color: #FFF;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.store button {
+    padding: 12px 20px;
+    background-color: #03A9F4;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.store button:hover {
+    background: #0288D1;
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Footer */
+footer {
+    background-color: #34495e; /* Azul oscuro */
+    color: #fff;
+    padding: 2rem 0;
+    margin-top: auto;  /* Asegura que el footer se quede al fondo */
+    transition: background-color 0.3s ease;
+}
+
+footer:hover {
+    background-color: #2C3E50;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0 20px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-link {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #ff6f61; /* Coral */
+}
+
+.footer-social {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icon {
+    color: #fff;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+    color: #ff6f61; /* Coral */
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .action-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .game-mode {
+        padding: 15px;
+    }
+
+    header nav {
+        padding: 20px;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 768px) {
+    header nav {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .game-mode {
+        margin-bottom: 15px;
+    }
+
+    .game-mode button {
+        padding: 10px 15px;
+    }
+
+    .store h1 {
+        font-size: 1.6rem;
+    }
+
+    .store p {
+        font-size: 1rem;
+    }
+
+    .store button {
+        font-size: 1rem;
+    }
+
+    .action-buttons button {
+        padding: 10px 15px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header nav h2 {
+        font-size: 1.3rem;
+    }
+
+    .game-mode h2 {
+        font-size: 1.2rem;
+    }
+
+    .store h1 {
+        font-size: 1.5rem;
+    }
+
+    .store button {
+        font-size: 1rem;
+    }
+
+    .action-buttons button {
+        padding: 10px 15px;
+        font-size: 1rem;
+    }
+}

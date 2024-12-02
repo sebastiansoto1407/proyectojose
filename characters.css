@@ -1,0 +1,322 @@
+/* Estilos Globales */
+body {
+    background-color: #1e3c72; /* Azul oscuro para el fondo */
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    line-height: 1.6;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Contenedor principal */
+.main-content {
+    flex: 1;
+    padding: 0 20px;
+    transition: padding 0.3s ease;
+}
+
+/* Barra de navegación */
+.navbar {
+    background-color: #2E3B4E;
+    color: #fff;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-radius: 10px;
+}
+
+.navbar .navbar-brand {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #fff;
+    transition: color 0.3s ease;
+}
+
+.navbar .navbar-brand:hover {
+    color: #f39c12; /* Efecto hover en la marca (amarillo) */
+}
+
+.navbar .nav-link {
+    color: #fff !important;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    margin-right: 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.navbar .nav-link:hover {
+    color: #f39c12; /* Resalta con amarillo */
+    transform: scale(1.1);
+}
+
+/* Sección principal del juego */
+.game-section {
+    background-color: #ffb347; /* Naranja vibrante */
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    padding: 3rem 2rem;
+    margin-top: 2rem;
+    text-align: center;
+    animation: fadeIn 1s forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.game-section:hover {
+    transform: translateY(-5px); /* Efecto de hover */
+}
+
+.game-section h3 {
+    font-size: 2.5rem;
+    color: #2d3436;
+    margin-bottom: 1.2rem;
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.game-section h3:hover {
+    color: #e74c3c; /* Rojo intenso */
+    transform: scale(1.1);
+}
+
+/* Imagen del personaje */
+.game img {
+    max-width: 85%;
+    border-radius: 20px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.game img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Botones del juego */
+.game-btn {
+    width: 100%;
+    font-size: 1.3rem;
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    background-color: #f39c12; /* Amarillo cálido */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.game-btn:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}
+
+.game-btn:hover:not(:disabled) {
+    background-color: #ff6f61; /* Rojo coral */
+    transform: translateY(-3px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.game-btn:active:not(:disabled) {
+    background-color: #f39c12;
+    transform: translateY(2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor de chat */
+.chat-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 100%;
+    max-width: 400px;
+    background-color: #f39c12; /* Amarillo cálido */
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    animation: slideUp 0.5s forwards;
+    opacity: 0;
+}
+
+@keyframes slideUp {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.chat-messages {
+    overflow-y: auto;
+    max-height: 260px;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    color: #2d3436;
+}
+
+#chat-input {
+    padding: 14px;
+    font-size: 1.1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    width: calc(100% - 50px);
+    background-color: #ecf0f1;
+    transition: border-color 0.3s ease;
+}
+
+#chat-input:focus {
+    border-color: #2c546e;
+    outline: none;
+}
+
+/* Cronómetro */
+.timer {
+    font-size: 3rem;
+    color: #e74c3c;
+    font-weight: 600;
+    margin-top: 20px;
+    transition: color 0.3s ease;
+}
+
+.timer.low-time {
+    color: #f39c12;
+}
+
+/* Botón de inicio del cronómetro */
+.start-btn {
+    font-size: 1.3rem;
+    padding: 12px 20px;
+    background-color: #3498db; /* Azul intenso */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.start-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-3px);
+}
+
+.start-btn:active {
+    background-color: #3498db;
+    transform: translateY(2px);
+}
+
+/* Footer */
+footer {
+    background-color: #34495e;
+    color: #fff;
+    padding: 2rem 0;
+    margin-top: auto;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0 20px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-link {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #ff6f61; /* Coral */
+}
+
+.footer-social {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icon {
+    color: #fff;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+    color: #ff6f61; /* Coral */
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-links {
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .footer-social {
+        justify-content: center;
+    }
+
+    .game-section {
+        padding: 2rem;
+    }
+
+    .game-section h3 {
+        font-size: 1.8rem;
+    }
+
+    .game-btn {
+        font-size: 1.1rem;
+        padding: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-section {
+        padding: 1.5rem;
+    }
+
+    .game-btn {
+        font-size: 1rem;
+        padding: 12px;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-social {
+        justify-content: center;
+    }
+}

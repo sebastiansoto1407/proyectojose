@@ -1,0 +1,291 @@
+/* Global Styles */
+body {
+    background-color: #3b4452; /* Fondo claro para una atmósfera suave */
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #2c3e50; /* Texto en tono oscuro para contraste */
+    line-height: 1.6;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Barra de navegación */
+.navbar {
+    background-color: #3498db; /* Azul brillante */
+    padding: 1.5rem 2rem;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar:hover {
+    background-color: #2980b9; /* Azul más oscuro en hover */
+}
+
+.profile {
+    color: #fff;
+    text-align: right;
+}
+
+.profile p {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.profile button {
+    margin-top: 10px;
+    background-color: #ff6f61; /* Coral suave */
+    color: #fff;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.profile button:hover {
+    background-color: #e74c3c; /* Coral más intenso en hover */
+    transform: translateY(-3px);
+}
+
+.profile button:active {
+    transform: translateY(0);
+}
+
+.profile button:focus {
+    outline: none;
+}
+
+/* Sección del juego */
+.game-section {
+    background-color: #ffffff; /* Blanco suave */
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    padding: 3rem 2rem;
+    text-align: center;
+    margin-top: 3rem;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: padding 0.3s ease;
+    background: linear-gradient(135deg, #f39c12, #ff6f61); /* Degradado suave de amarillo a coral */
+    color: #fff;
+}
+
+.game-section h3 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #fff; /* Blanco para destacar sobre el fondo colorido */
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Botones del juego */
+.game-btn {
+    width: 100%;
+    font-size: 1.3rem;
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    background-color: #27ae60; /* Verde menta */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.game-btn:hover {
+    background-color: #2ecc71; /* Verde más brillante */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.game-btn:active {
+    transform: translateY(0);
+}
+
+.game-btn:focus {
+    outline: none;
+}
+
+/* Mensaje de resultado */
+#result-message {
+    display: none;
+    margin-top: 2rem;
+    background-color: #f39c12; /* Amarillo vibrante */
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    font-size: 1.5rem;
+    color: #2c3e50;
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+#result-text {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #34495e;
+    margin-top: 10px;
+}
+
+/* Botón para volver a la página principal */
+.back-button {
+    margin-top: 2rem;
+    padding: 12px 24px;
+    background-color: #3498db; /* Azul claro */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.back-button:hover {
+    background-color: #2980b9; /* Azul más oscuro */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.back-button:active {
+    transform: translateY(0);
+}
+
+.back-button:focus {
+    outline: none;
+}
+
+/* Footer */
+footer {
+    background-color: #34495e; /* Azul oscuro */
+    color: #fff;
+    padding: 2rem 0;
+    margin-top: auto;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0 20px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-link {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #ff6f61; /* Coral */
+}
+
+.footer-social {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icon {
+    color: #fff;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+    color: #ff6f61; /* Coral */
+}
+
+/* Ajustes Responsivos */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-links {
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .footer-social {
+        justify-content: center;
+    }
+
+    .game-section {
+        padding: 2rem;
+        margin-top: 2rem;
+    }
+
+    .game-section h3 {
+        font-size: 2rem;
+    }
+
+    .game-btn {
+        font-size: 1.1rem;
+        padding: 14px;
+    }
+
+    .profile button {
+        padding: 6px 12px;
+    }
+
+    .back-button {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+
+    #result-message {
+        font-size: 1.3rem;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-section {
+        padding: 1.5rem;
+    }
+
+    .game-section h3 {
+        font-size: 1.8rem;
+    }
+
+    .game-btn {
+        font-size: 1rem;
+        padding: 12px;
+    }
+
+    .back-button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+
+    #result-message {
+        font-size: 1.2rem;
+        padding: 18px;
+    }
+}
